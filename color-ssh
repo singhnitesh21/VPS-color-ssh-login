@@ -1,0 +1,24 @@
+To enable colorful login with SSH, you can modify the .bashrc file in your home directory on the remote server. Here are the steps:
+
+1.Connect to the remote server using SSH.
+2.Open the .bashrc file in a text editor, such as nano or vim. For example:
+
+nano ~/.bashrc
+
+3.Add the following lines to the end of the file:
+------------------------------------------------------
+if [ "$PS1" ]; then
+    if [ "$(id -u)" -eq 0 ]; then
+        PS1='\[\033[01;31m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+    else
+        PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+    fi
+fi
+--------------------------------------------------------
+This will set the prompt to display the username in green, the hostname in red, and the current working directory in blue. The prompt will be bolded for the root user.
+
+4.Save the .bashrc file and exit the text editor.
+5.To make the changes take effect, you can either start a new SSH session or run the following command:
+source ~/.bashrc
+
+Now, when you log in to the remote server using SSH, you should see a colorful prompt. The exact colors and format of the prompt can be customized to your liking by modifying the escape sequences in the .bashrc file.
